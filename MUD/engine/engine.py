@@ -46,6 +46,7 @@ class MudEngine():
             # check for new connections
             for id in self.server.get_new_players():
                 if id not in self.players:
+                    print(id)
                     self.players[id] = {}
 
             # check for disconnections
