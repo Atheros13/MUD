@@ -1,0 +1,21 @@
+mana = level
+mohio = experience
+ora = life
+kaha = physical power
+tapu = spiritual power
+
+ihi?
+karakia?
+waiata?
+haka?
+
+korero = communicate command - speaking in the room you are in
+panui = communicate command - speaking directly to a player (communicates telepathically i.e. any room, and only they can hear it) 
+
+haere = move command i.e. haere kei roto (could actually be written haere roto, or just roto)
+titiro = look command 
+whakarongo = listen command 
+
+
+
+
