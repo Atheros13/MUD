@@ -1,1 +1,2 @@
-from .player import Player
+from .player import *
+from .world import *

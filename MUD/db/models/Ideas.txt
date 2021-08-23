@@ -1,0 +1,4 @@
+Maybe the models for things like Player, Room, Commands etc will have an associated Language Model that 
+allocates language words for attributes. i.e. if the Player model has "name" as an attribute, then 
+the PlayerLanguage model or class will have a list of what that language calls that i.e. "name" = "ingoa". 
+

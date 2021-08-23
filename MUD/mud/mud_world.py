@@ -7,6 +7,14 @@
 #-----------------------------------------------------------------------------#
 
 ###
+class Room():
+
+    
+
+    def __init__(self, *args, **kwargs):
+
+        pass
+
 
 class MudWorld():
 
@@ -22,6 +30,8 @@ class MudWorld():
     def build_te_kore(self):
 
         note = 'Na te Kore, te Po,\nKi te Whai-Ao,\nKi te Ao-Mārama,\nTihei mauri-ora!'
+
+    
 
 
 

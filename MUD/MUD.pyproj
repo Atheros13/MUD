@@ -22,8 +22,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="db\models\player.py" />
-    <Compile Include="db\models\space.py" />
+    <Compile Include="db\models\command\command.py" />
+    <Compile Include="db\models\command\__init__.py" />
+    <Compile Include="db\models\player\player.py" />
+    <Compile Include="db\models\player\__init__.py" />
+    <Compile Include="db\models\world\room.py" />
+    <Compile Include="db\models\world\__init__.py" />
     <Compile Include="db\models\__init__.py" />
     <Compile Include="engine\archive_notes.py" />
     <Compile Include="engine\deploy.py" />
@@ -36,6 +40,7 @@
     <Compile Include="settings.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="db\models\ideas.txt" />
     <Content Include="mud\mud_ideas.txt" />
     <Content Include="requirements.txt" />
   </ItemGroup>
@@ -53,6 +58,9 @@
   <ItemGroup>
     <Folder Include="db\" />
     <Folder Include="db\models\" />
+    <Folder Include="db\models\command\" />
+    <Folder Include="db\models\world\" />
+    <Folder Include="db\models\player\" />
     <Folder Include="engine\" />
     <Folder Include="mud\" />
   </ItemGroup>
