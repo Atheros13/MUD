@@ -88,16 +88,35 @@ class MudEngine():
 
         if data[0] in ["Hut", "hut"]:
             self.move_room(id, "hut")
+
         elif data[0] in ["Yard", "yard"]:
             self.move_room(id, "yard")
+
         elif data[0] in ["Look", "look", "l"]:
             if self.players[id]["room"] == "yard":
                 self.yard(id)
             else:
                 self.hut(id)
+
         elif data[0] in ["Say", "say"] and len(data) > 1:
             sentence = " ".join(data[1:])
             self.speak(id, sentence)
+
+        elif data[0] in ["Shout", "shout"] and len(data) > 1:
+            sentence = " ".join(data[1:])
+            self.shout(id, sentence)
+
+        elif data[0] in ["Tell", "tell"] and len(data) > 2:
+            check = False
+            for pid in self.players:
+                if self.players[pid]["name"] == data[1]:
+                    tell_name = data[1]
+                    sentence = " ".join(data[2:])
+                    self.tell(id, pid, tell_name, sentence)
+                    check = True
+            if not check:
+                self.server.send_data(id, "There is no one called %s" % data[1])
+
 
     def speak(self, id, sentence):
 
@@ -105,8 +124,27 @@ class MudEngine():
         name = self.players[id]["name"]
 
         for pid in self.players:
-            if self.players[pid]["room"] == room and pid != id:
-                self.server.send_data(pid, "%s says: '%s'\n" % (name, sentence))
+            if self.players[pid]["room"] == room:
+                if pid != id:
+                    self.server.send_data(pid, "%s says: '%s'\n" % (name, sentence))
+                else:
+                    self.server.send_data(id, "You say: '%s'\n" % sentence)
+
+    def shout(self, id, sentence):
+
+        name = self.players[id]["name"]
+
+        for pid in self.players:
+            if pid != id:
+                self.server.send_data(pid, "%s SHOUTS: '%s'\n" % (name, sentence.upper()))
+            else:
+                self.server.send_data(id, "You SHOUT: '%s'\n" % sentence.upper())
+
+    def tell(self, id, pid, tell_name, sentence):
+
+        name = self.players[id]["name"]
+        self.server.send_data(pid, "%s's words enter your mind: '%s'" % (name, sentence))
+        self.server.send_data(id, "You tell %s: '%s'" % (tell_name, sentence))
 
     def move_room(self, id, room):
 
