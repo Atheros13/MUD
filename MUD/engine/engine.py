@@ -117,6 +117,37 @@ class MudEngine():
             if not check:
                 self.server.send_data(id, "There is no one called %s" % data[1])
 
+        elif data[0] in ["Emote", "emote"] and len(data) > 2:
+            check = False
+            for pid in self.players:
+                if self.players[pid]["name"] == data[1] and self.players[pid]["room"] == self.players[id]["room"]:
+                    tell_name = data[1]
+                    sentence = " ".join(data[2:])
+                    self.emote(id, pid, tell_name, sentence)
+                    check = True
+            if not check:
+                self.server.send_data(id, "There is no one called %s" % data[1])
+
+        elif data[0] in ["Action", "action"] and len(data) > 1:
+            for pid in self.players:
+                if self.players[pid]["room"] == self.players[id]["room"]:
+                    sentence = " ".join(data[1:])
+                    self.action(id, sentence)
+
+
+    def emote(self, id, pid, tell_name, sentence):
+
+        name = self.players[id]["name"]
+        self.server.send_data(pid, "%s *%s* you" % (name, sentence))
+        for ppid in self.players:
+            if self.players[ppid]["room"] == self.players[id]["room"]:
+                self.server.send_data(ppid, "%s *%s* %s" % (name, sentence, tell_name))
+    
+    def action(self, id, sentence):
+        name = self.players[id]["name"]
+        for ppid in self.players:
+            if self.players[ppid]["room"] == self.players[id]["room"]:
+                self.server.send_data(ppid, "%s %s" % (name, sentence))
 
     def speak(self, id, sentence):
 
